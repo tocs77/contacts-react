@@ -30,7 +30,7 @@ for i in range(CONTACTS_AMOUNT):
                              random.choice(emails))
     phone = makePhone()
     contact = {'firstName': first_name, 'secondName': second_name,
-               'email': email, 'phone': phone, 'id': i}
+               'email': email, 'phone': phone, 'id': i+1}
     contacts.append(contact)
 
 data = {'contacts': contacts, 'user': {'name': 'test', 'password': 'test'}}
