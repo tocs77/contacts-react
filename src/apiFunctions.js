@@ -16,3 +16,23 @@ export const getAllContacts = async () => {
 
   return newContacts;
 };
+
+export const getContact = async (id) => {
+  let response = await axios.get(`/contacts/${id}`);
+  return response.data;
+};
+
+export const deleteContact = async (id) => {
+  let response = await axios.delete(`/contacts/${id}`);
+  //console.log(response);
+};
+
+export const updateContact = async (id, data) => {
+  let response = await axios.patch(`/contacts/${id}`, { ...data });
+  //console.log(response);
+};
+
+export const addContact = async (data) => {
+  let response = await axios.post('/contacts/', { ...data });
+  //console.log(response);
+};

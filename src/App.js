@@ -1,20 +1,24 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import './App.css';
 
-import axios from './axios-instance';
-
+import Header from './components/header/header';
 import ContactList from './components/contactList/contactList';
-import Header from './components/header/header'
+import EditDialog from './components/editDialog/editDialog';
+import AddDialog from './components/addDialog/addDialog';
 
 function App() {
-  axios.get('/contacts').then((response) => console.log(response));
-
   return (
-    <div className='App'>
-      <Header />
-      <ContactList />
-    </div>
+    <BrowserRouter>
+      <div className='App'>
+        <Header />
+        <Route exact={true} path='/' component={ContactList} />
+        <Route exact={true} path='/edit/:id' component={EditDialog} />
+        <Route exact={true} path='/add/' component={AddDialog} />
+      </div>
+    </BrowserRouter>
   );
 }
 

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import ContactCard from './contactCard/contactCard';
 
@@ -8,38 +9,49 @@ import classes from './contactList.module.css';
 
 const ContactList = () => {
   const [contacts, setContacts] = useState([]);
+  let history = useHistory();
 
-  const editHandler = (id) => {
-    console.log('Edit ', id);
-  };
-
-  const deleteHandler = (id) => {
-    console.log('Delete ', id);
-  };
-
-  useEffect(() => {
+  const updateContacts = useCallback(() => {
     async function f() {
       const newContacts = await apiFunctions.getAllContacts();
-      const c = newContacts.map((contact) => {
-        return (
-          <ContactCard
-            contact={contact}
-            key={contact.id}
-            editHandler={() => editHandler(contact.id)}
-            deleteHandler={()=>deleteHandler(contact.id)}
-          />
-        );
-      });
-      setContacts(c);
+      setContacts(newContacts);
     }
     f();
   }, []);
+
+  useEffect(() => {
+    let isSubscribed = true;
+    if (isSubscribed) {
+      updateContacts();
+    }
+    return () => (isSubscribed = false);
+  }, [updateContacts]);
+
+  const editHandler = async (id) => {
+    history.push(`/edit/${id}`);
+  };
+
+  const deleteHandler = async (id) => {
+    await apiFunctions.deleteContact(id);
+    updateContacts();
+  };
 
   if (contacts.length === 0) {
     return <p>No contacts</p>;
   }
 
-  return <ul className={classes.contactList}>{contacts}</ul>;
+  const contactCards = contacts.map((contact) => {
+    return (
+      <ContactCard
+        contact={contact}
+        key={contact.id}
+        editHandler={() => editHandler(contact.id)}
+        deleteHandler={() => deleteHandler(contact.id)}
+      />
+    );
+  });
+
+  return <ul className={classes.contactList}>{contactCards}</ul>;
 };
 
 export default ContactList;

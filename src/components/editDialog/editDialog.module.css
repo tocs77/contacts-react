@@ -1,0 +1,65 @@
+.editDialog {
+  max-width: 50vw;
+  transform: translate(50%, 25%);
+  border: 1px solid;
+}
+
+.title {
+  background: linear-gradient(to left, #8e2de2, #4a00e0);
+  color: white;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.inputs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  padding: 1rem;
+  align-items: flex-start;
+}
+
+.label {
+  font-size: 1.5rem;
+  margin: .5rem;
+}
+
+.input {
+  border: none;
+  font-size: 2rem;
+  background-color: lightgray;
+  min-width: 25rem;
+}
+
+.buttonBox {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2rem;
+  padding: 1rem;
+}
+
+.button {
+  color: white;
+  border: none;
+  background: linear-gradient(#2980b9, #2c3e50);
+  font-size: 1.5rem;
+  padding: .5rem;
+  cursor: pointer;
+  width: 25%;
+  transition: all .2s;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.button:hover {
+  transform: scale(1.2);
+  transform: translateY(-0.2rem);
+}
