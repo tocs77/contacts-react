@@ -17,6 +17,7 @@ const ContactList = () => {
   const updateContacts = useCallback(() => {
     async function f() {
       const newContacts = await apiFunctions.getAllContacts();
+      // Sort to show last added contacts in the top of page
       newContacts.sort((a, b) => parseInt(a.id) < parseInt(b.id));
       setContacts(newContacts);
     }

@@ -23,16 +23,13 @@ export const getContact = async (id) => {
 };
 
 export const deleteContact = async (id) => {
-  let response = await axios.delete(`/contacts/${id}`);
-  //console.log(response);
+  await axios.delete(`/contacts/${id}`);
 };
 
 export const updateContact = async (id, data) => {
-  let response = await axios.patch(`/contacts/${id}`, { ...data });
-  //console.log(response);
+  await axios.patch(`/contacts/${id}`, { ...data });
 };
 
 export const addContact = async (data) => {
-  let response = await axios.post('/contacts/', { ...data });
-  //console.log(response);
+  await axios.post('/contacts/', { ...data });
 };
