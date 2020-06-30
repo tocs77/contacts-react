@@ -33,7 +33,7 @@ for i in range(CONTACTS_AMOUNT):
                'email': email, 'phone': phone, 'id': i+1}
     contacts.append(contact)
 
-data = {'contacts': contacts, 'user': {'name': 'test', 'password': 'test'}}
+data = {'contacts': contacts, 'auth': [{'name': 'test', 'password': 'test'}]}
 
 with open("data.json", "w") as write_file:
     json.dump(data, write_file, indent=4)

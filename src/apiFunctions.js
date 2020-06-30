@@ -33,3 +33,8 @@ export const updateContact = async (id, data) => {
 export const addContact = async (data) => {
   await axios.post('/contacts/', { ...data });
 };
+
+export const authenticate = async (name, password) => {
+  let response = await axios.get(`/auth?name=${name}&password=${password}`);
+  return response.data;
+};
