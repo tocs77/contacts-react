@@ -1,5 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import { Context } from '../../Context';
 
 import ContactCard from './contactCard/contactCard';
 
@@ -10,14 +12,33 @@ import classes from './contactList.module.css';
 const ContactList = () => {
   const [contacts, setContacts] = useState([]);
   let history = useHistory();
+  const { filterContext } = useContext(Context);
 
   const updateContacts = useCallback(() => {
     async function f() {
       const newContacts = await apiFunctions.getAllContacts();
+      newContacts.sort((a, b) => parseInt(a.id) < parseInt(b.id));
       setContacts(newContacts);
     }
     f();
   }, []);
+
+  const filterContacts = () => {
+    //Use filter to select contacts
+    if (filterContext.length > 0) {
+      const filteredContacts = contacts.filter((contact) => {
+        return (
+          contact.firstName.toLowerCase().includes(filterContext.toLowerCase()) ||
+          contact.secondName.toLowerCase().includes(filterContext.toLowerCase()) ||
+          contact.email.toLowerCase().includes(filterContext.toLowerCase()) ||
+          contact.phone.toLowerCase().includes(filterContext.toLowerCase())
+        );
+      });
+      return filteredContacts;
+    } else {
+      return [...contacts];
+    }
+  };
 
   useEffect(() => {
     let isSubscribed = true;
@@ -40,7 +61,9 @@ const ContactList = () => {
     return <p>No contacts</p>;
   }
 
-  const contactCards = contacts.map((contact) => {
+  const nc = filterContacts(contacts);
+
+  const contactCards = nc.map((contact) => {
     return (
       <ContactCard
         contact={contact}

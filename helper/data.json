@@ -1,13 +1,6 @@
 {
   "contacts": [
     {
-      "firstName": "Cayden",
-      "secondName": "Miller",
-      "email": "cmiller@mail.ru",
-      "phone": "(638)841-44-30",
-      "id": 9
-    },
-    {
       "firstName": "Theodore",
       "secondName": "Carter",
       "email": "tcarter@gmail.com",
